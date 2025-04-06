@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abel Inc.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="abel.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+        }
+
+        .section {
+            background-color: #e0dbc3;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        header {
+            background-color: #e0dbc3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* border-bottom: 0.01em solid #1a1a1a; */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #4d3818;
+        }
+
+        .hand-logo {
+            width: 3rem;
+            height: 3rem;
+            margin-right: 10px;
+            fill: #4d3818;
+            margin-top: -5px; /* Moves the logo up slightly */
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4d3818;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #4d3818;
+            font-weight: 600;
+        }
+
+        /* Home Section */
+        #home {
+            text-align: center;
+            padding-top: min(20%,110px);
+        }
+
+        .home-text {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .phone-image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .phone-image {
+            display: block;
+            width: 100%;
+        }
+
+        .phone-image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20%;
+            background: linear-gradient(to bottom, rgba(224, 219, 195, 0) 0%, #e0dbc3 100%);
+            pointer-events: none;
+        }
+
+        .supported-by {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 40px;
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+        }
+
+        .supported-by span {
+            margin-right: 10px;
+            color: #333;
+        }
+
+        .gap-logo {
+            height: 30px;
+        }
+
+        /* Offering Section */
+        #offering {
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .offering-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .offering-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+            flex-wrap: wrap;
+        }
+
+        .offering-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensures buttons align at the bottom */
+            background-color: #f8f5e980;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .offering-box .book-btn {
+            margin-top: auto; /* Ensure buttons align at the bottom */
+        }
+
+        .box-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .included-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.3;
+        }
+
+        .checkmark {
+            margin-right: 8px;
+            display: inline-block;
+            min-width: 16px;
+        }
+
+        .book-btn {
+            background-color: #6b5230;
+            color: #e0dbc3; /* Updated text color */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0;
+            font-weight: 500;
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Waiting List Section */
+        #waitinglist {
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .waitinglist-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .email-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            width: 80%;
+            padding: 10px; /* Increased padding for a larger input field */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Add subtle shadow */
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+
+        .signup-btn {
+            background-color: #6b5230;
+            color: #e0dbc3; /* Updated text color */
+            border: none;
+            padding: 10px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            width: auto;
+        }
+
+        .email-note {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .contact-value {
+            line-height: 1.5;
+        }
+
+        .contact-value a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Chat Icon */
+        .chat-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #6b5230;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .chat-svg {
+            width: 30px;
+            height: 30px;
+            fill: #e0dbc3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+            nav {
+                margin-top: 10px;
+            }
+
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+                font-weight: 600;
+            }
+
+            .offering-boxes {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .offering-box {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+
+            .home-text {
+                /* font-size: 1.5rem; */
+            }
+
+            .supported-by {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="#home" class="logo">
+            <img src="dark logo.svg" alt="Hand logo" class="hand-logo">
+            <span class="logo-text">Abel Inc.</span>
+        </a>
+        <nav>
+            <a href="#offering">Our Offering</a>
+            <a href="#waitinglist">Waiting List</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <section id="home" class="section">
+        <div class="home-content">
+            <h1 class="home-text">Helping funds in<br>emerging markets<br>report to their investors.</h1>
+            <div class="phone-image-container">
+                <img src="isolate_psd_hand_holding_smartphone_template (1).svg" alt="Hand holding smartphone with app" class="phone-image">
+            </div>
+            <div class="supported-by">
+                <span>Supported By</span>
+                <img src="ctg-logo.svg" alt="Close the Gap logo" class="gap-logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="offering" class="section">
+        <h1 class="offering-title">Our Offering</h1>
+        <div class="offering-boxes">
+            <div class="offering-box">
+                <h2 class="box-title">Silver</h2>
+                <p class="included-title">What's Included?</p>
+                <ul class="feature-list">
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Automated quarterly surveys inside WhatsApp</span>
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Collection of revenue, COGs, employees, and room for additional comments from the
+                            entrepreneurs</span>
+                    </li>
+                </ul>
+                <button class="book-btn">Book Demo</button>
+            </div>
+
+            <div class="offering-box">
+                <h2 class="box-title">Gold</h2>
+                <p class="included-title">What's Included?</p>
+                <ul class="feature-list">
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Everything included in Silver</span>
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Company-specific KPIs in the WhatsApp survey</span>
+                    </li>
+                </ul>
+                <button class="book-btn">Book Demo</button>
+            </div>
+
+            <div class="offering-box">
+                <h2 class="box-title">Platinum</h2>
+                <p class="included-title">What's Included?</p>
+                <ul class="feature-list">
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Everything included in Gold</span>
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Automated quarterly reports: AI-generated analysis and graphs</span>
+                    </li>
+                </ul>
+                <button class="book-btn">Book Demo</button>
+            </div>
+        </div>
+        <p class="pricing-note">Pricing and other terms are still under development. Please sign up to our waiting list
+            for more information.</p>
+    </section>
+
+    <section id="waitinglist" class="section">
+        <h1 class="waitinglist-title">Sign Up for the Waiting List:</h1>
+        <div class="email-form">
+            <input type="email" class="email-input" placeholder="Enter your email address">
+            <button class="signup-btn">Sign Up*</button>
+            <p class="email-note">*Your email address will only be used to inform you when our service becomes
+                available.</p>
+        </div>
+
+        <div id="contact" class="contact-info">
+            <h2 class="contact-title">Contact Information</h2>
+            <div class="contact-item">
+                <span class="contact-label">Email</span>
+                <div class="contact-value">
+                    Laurent Kuligha Ambrose (COO): laurent@closethegap.org<br>
+                    Arthur Van Loo (CEO): arthur@vanhoo.biz
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <div class="contact-value">+32 488 21 09 75</div>
+            </div>
+
+            <div class="contact-item">
+                <span class="contact-label">LinkedIn</span>
+                <div class="contact-value">
+                    <a
+                        href="https://www.linkedin.com/company/abelcorp/">https://www.linkedin.com/company/abelcorp/</a><br>
+                    <a
+                        href="https://www.linkedin.com/company/close-the-gap-kenya/">https://www.linkedin.com/company/close-the-gap-kenya/</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chat-icon">
+        <svg class="chat-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+        </svg>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Email form submission
+        const signupBtn = document.querySelector('.signup-btn');
+        if (signupBtn) {
+            signupBtn.addEventListener('click', function () {
+                const emailInput = document.querySelector('.email-input');
+                const email = emailInput.value.trim();
+
+                if (!email) {
+                    alert('Please enter your email address.');
+                    return;
+                }
+                if (!validateEmail(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                // Make POST request to Google Form
+                const formData = new URLSearchParams();
+                formData.append('entry.1778485064', email);
+                formData.append('fvv', '1');
+                formData.append('partialResponse', '[null,null,"-3485836881602893508"]');
+                formData.append('pageHistory', '0');
+                formData.append('fbzx', '-3485836881602893508');
+                formData.append('submissionTimestamp', Date.now().toString());
+
+                fetch('https://docs.google.com/forms/d/e/1FAIpQLSeOAoYvcgUpyvEOS-1K4mZqISp_AJ5gu7Kr1JpWjlT5evxxgA/formResponse', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData.toString(),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Thank you for joining our waiting list! We will notify you when our service becomes available.');
+                        emailInput.value = '';
+                    } else {
+                        alert('There was an issue submitting your email. Please try again later.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an issue submitting your email. Please try again later.');
+                });
+            });
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Chat icon functionality
+        const chatIcon = document.querySelector('.chat-icon');
+        if (chatIcon) {
+            chatIcon.addEventListener('click', function () {
+                window.location.href = 'https://wa.me/32488210975';
+            });
+        }
+
+        // Add event listeners to Book Demo buttons
+        document.querySelectorAll('.book-btn').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const plans = ['Silver', 'Gold', 'Platinum'];
+                const selectedPlan = plans[index];
+                const whatsappLink = `https://wa.me/32488210975?text=I%20would%20like%20a%20demo%20of%20the%20${encodeURIComponent(selectedPlan)}%20plan`;
+                window.location.href = whatsappLink;
+            });
+        });
+    </script>
+</body>
+
+</html>
