@@ -428,49 +428,35 @@
         <h1 class="offering-title">Our Offering</h1>
         <div class="offering-boxes">
             <div class="offering-box">
-                <h2 class="box-title">Silver</h2>
+                <h2 class="box-title">Business Owners</h2>
                 <p class="included-title">What's Included?</p>
                 <ul class="feature-list">
                     <li>
                         <span class="checkmark">✓</span>
-                        <span>Automated quarterly surveys inside WhatsApp</span>
+                        <span>WhatsApp tool to record revenue and expenses</span>
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
-                        <span>Collection of revenue, COGS, employees, and room for additional comments from the
-                            entrepreneurs</span>
+                        <span>Automated accounting system that generates monthly financial statements</span>
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        <span>Monthly AI-generated reports with business advice</span>
                     </li>
                 </ul>
                 <button class="book-btn">Book Demo</button>
             </div>
-
             <div class="offering-box">
-                <h2 class="box-title">Gold</h2>
+                <h2 class="box-title">VC Funds</h2>
                 <p class="included-title">What's Included?</p>
                 <ul class="feature-list">
                     <li>
                         <span class="checkmark">✓</span>
-                        <span>Everything included in Silver</span>
+                        <span>Everything in the “Business Owners” plan</span>
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
-                        <span>Company-specific KPIs in the WhatsApp survey</span>
-                    </li>
-                </ul>
-                <button class="book-btn">Book Demo</button>
-            </div>
-
-            <div class="offering-box">
-                <h2 class="box-title">Platinum</h2>
-                <p class="included-title">What's Included?</p>
-                <ul class="feature-list">
-                    <li>
-                        <span class="checkmark">✓</span>
-                        <span>Everything included in Gold</span>
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        <span>Automated quarterly reports: AI-generated analysis and graphs</span>
+                        <span>Bespoke portfolio reporting</span>
                     </li>
                 </ul>
                 <button class="book-btn">Book Demo</button>
@@ -589,9 +575,9 @@
         // Add event listeners to Book Demo buttons
         document.querySelectorAll('.book-btn').forEach((button, index) => {
             button.addEventListener('click', () => {
-                const plans = ['Silver', 'Gold', 'Platinum'];
+                const plans = ['business owner', 'VC investor'];
                 const selectedPlan = plans[index];
-                const whatsappLink = `https://wa.me/32488210975?text=I%20would%20like%20a%20demo%20of%20the%20${encodeURIComponent(selectedPlan)}%20plan`;
+                const whatsappLink = `https://wa.me/32488210975?text=I%20am%20a%20${encodeURIComponent(selectedPlan)}%20and%20would%20like%20a%20demo`;
                 window.location.href = whatsappLink;
             });
         });
